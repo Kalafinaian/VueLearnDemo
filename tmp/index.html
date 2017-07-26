@@ -1,0 +1,122 @@
+<htmL>
+<head>
+    <meta charset="utf-8">
+    <title>Webpack Sample Project</title>
+    <script src="../src/assets/vue.2.3.4.js"></script>
+    <script src="build.js"  defer="defer"></script>
+    
+</head>
+<body>
+    
+    <div id="demo">
+        <div id="demo_title"></div>
+        <template v-for="demo_branch in branches"> 
+            <input type="radio"
+                :id="demo_branch"
+                :value="demo_branch"
+                name="demo_branch"
+                v-model="currentBranch"
+            >
+            <label :for="demo_branch"> {{demo_branch}}</label>
+        </template>   
+
+        <p>vue {{ currentBranch }}</p>
+        <ul>
+            <li v-for="record in commits" >
+            <a :href="record" target="_blank" class="commit">
+                {{record}}
+            </a>
+            <br>
+        </ul>
+    </div>
+
+ </body>
+ <script>
+        var demo=new Vue(
+        {
+            el:'#demo',
+
+            // data:{
+            //     branches:['master','dev'],
+            //     currentBranch:'master',
+            // },
+
+            // computed:{
+            //     commits:function()
+            //     {
+            //         console.log('For test')
+            //         console.log(self.currentBranch+" "+self.currentBranch=="master");
+
+            //         if(self.currentBranch=="master")
+            //         {
+            //             master_arr=[];
+            //             master_arr.push("https://github.master0.com");
+            //             master_arr.push("https://github.master1.com");
+            //             master_arr.push("https://github.master2.com");
+                        
+            //             return master_arr;
+
+            //         }
+            //         else if(self.currentBranch=="dev")
+            //         {
+            //             dev_arr=[];
+            //             dev_arr.push("https://github.dev0.com");
+            //             dev_arr.push("https://github.dev1.com");
+            //             dev_arr.push("https://github.dev2.com");
+
+            //             return dev_arr;
+            //         }
+            //     }
+
+            // },
+
+
+
+            data:{
+                branches:['master','dev'],
+                currentBranch:'master',
+                commits:[]
+            },
+
+            created: function() 
+            {
+                this.fetchData();   
+            },
+
+
+            watch: {
+                currentBranch: 'fetchData'
+            },
+
+            methods:{
+                fetchData:function()
+                {
+                    console.log('For test')
+                    console.log(this.currentBranch+" "+this.currentBranch=="master");
+                    if(this.currentBranch=="master")
+                    {
+                        this.commits=[];
+                        this.commits.push("https://github.master0.com");
+                        this.commits.push("https://github.master1.com");
+                        this.commits.push("https://github.master2.com");
+                        
+
+                    }
+                    else if(this.currentBranch=="dev")
+                    {
+                        this.commits=[];
+                        this.commits.push("https://github.dev0.com");
+                        this.commits.push("https://github.dev1.com");
+                        this.commits.push("https://github.dev2.com");
+
+                    }
+
+
+                },
+
+            },
+
+        });  
+    </script>
+    
+</htmL>
